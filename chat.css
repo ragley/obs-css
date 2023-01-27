@@ -5,7 +5,7 @@
  * This should override all CSS in the default clear theme.
  */
 html {
-    font-size: 24px; 
+    font-size: 28px; 
     /* Everything scales with this font-size. 
      * Default if not manually set is 16px.    
      * Common values are 20px, 24px, 36px 48px.
