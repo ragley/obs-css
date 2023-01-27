@@ -1,0 +1,133 @@
+/* Dynamically scaling chat
+ * For use with https://nightdev.com/kapchat/ 
+ *
+ * Main file – full replace.
+ * This should override all CSS in the default clear theme.
+ */
+html {
+    font-size: 24px; 
+    /* Everything scales with this font-size. 
+     * Default if not manually set is 16px.    
+     * Common values are 20px, 24px, 36px 48px.
+     * Usage of `em` in font-size refers to the parent's font-size as 1em.
+     * Usage of `rem` refers to the root em value ( this ) instead.
+     * Use `rem` when scaling child objects where possible.
+     * 
+     * You could potentially just use em values here
+     * if you only cared about "scale" and not about exact font values.
+     * For example, 2.0em would be 200% scale on everything,
+     * but is the same as setting it to 32px ( 16px base. )
+     */  
+    width: 100%;
+    height: 100%;
+}
+body {
+    overflow: hidden;
+    margin: 0.313rem;
+}
+#chat_box {
+    background-color: rgba(106, 184, 158, 0.6);
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    /* This font-size changes all child element em bases 
+     * to 0.813 of the root, and is the reason why 
+     * we use `rem` everywhere.
+     * Otherwise everything in the lines themselves 
+     * would scale at only 81% of native. 
+     */
+    font-size: 0.813rem;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: bold;
+    position: absolute;
+    overflow: hidden;
+    color: #D3D3D3;
+    border-radius: 0.250rem;
+    width: calc(100% - 0.625rem);
+}
+#chat_box.dark {
+    background: rgba(0, 0, 0, 0.3);
+    color: #fff;
+}
+#chat_box.light {
+    background: rgba(255, 255, 255, 0.3);
+    color: #000;
+}
+.nick {
+    font-weight: bold;
+}
+
+.tag {
+    display: inline-block;
+    text-indent: 1.313rem;
+    background-position: 0 center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    display: inline-block;
+    vertical-align: bottom;
+    height: 1.125rem;
+    min-width: 1.125rem;
+    padding: 0;
+    margin-right: 0.188rem;
+    margin-bottom: -0.063rem;
+    text-indent: -624.938rem;
+    border-radius: 0.125rem;
+    -moz-border-radius: 0.125rem;
+    -webkit-border-radius: 0.125rem;
+    overflow: hidden;
+    /* Aligns with the vertical center of the line */
+    vertical-align: sub;
+}
+.chat_line {
+    margin-left: 0.188rem;
+    margin-right: 0.188rem;
+    padding-top: 0.125rem;
+    padding-bottom: 0.188rem;
+    /* Avoids clipping by increasing line height */
+    line-height: 1.250rem;
+}
+
+.chat_line > span {
+    /* Aligns all children with the vertical center of the line */
+    vertical-align: middle;
+}
+.chat_line .message {
+    word-wrap: break-word;
+}
+.chat_line .time_stamp {
+    display: none;
+    padding-right: 0.188rem;
+}
+.emoticon {
+    margin-bottom: -0.438rem;
+    /* Min-width/height are enforced to some scale of 18x18.
+     * Max-height is set to compensate for srcset scaling,
+     * else larger scales produce giant emoticons with 3x img scale
+     */
+    min-width:1.750rem;
+    min-height:1.750rem;
+    max-height:1.750rem;
+    /* Aligns with the vertical center of the line */
+    vertical-align: sub;
+}
+.cheermote {
+    width: auto;
+    max-height: 1.750rem;
+}
+
+/* Outside text stroke.  
+ * For use with https://nightdev.com/kapchat/ 
+ *
+ * For better readability through increased contrast. 
+ */
+.chat_line {
+    /* You can't really increase the stroke size beyond 1px, 
+     * so we're not using scaling em values.
+     * If you want a different stroke color, 
+     * remember to replace all 4 instances of #000.
+     */
+    text-shadow: -1px -1px 0px #000, 1px -1px 0px #000, -1px 1px 0 #000, 1px 1px 0 #000;
+    /* Add letter spacing in an attempt to 
+     * combat the crowding created by text-shadow     
+     */
+    letter-spacing: 0.060rem; 
+}
